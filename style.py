@@ -56,35 +56,10 @@ STYLE_SCALE = 1.2
 
 # weights for the individual models
 # assume that corresponding layers' top blob matches its name
-VGG19_WEIGHTS = {"content": {"conv4_2": 1},
-                 "style": {"conv1_1": 0.2,
-                           "conv2_1": 0.2,
-                           "conv3_1": 0.2,
-                           "conv4_1": 0.2,
-                           "conv5_1": 0.2}}
-VGG16_WEIGHTS = {"content": {"conv4_2": 1},
-                 "style": {"conv1_1": 0.2,
-                           "conv2_1": 0.2,
-                           "conv3_1": 0.2,
-                           "conv4_1": 0.2,
-                           "conv5_1": 0.2}}
-GOOGLENET_WEIGHTS = {"content": {"conv2/3x3": 2e-4,
-                                 "inception_3a/output": 1-2e-4},
-                     "style": {"conv1/7x7_s2": 0.2,
-                               "conv2/3x3": 0.2,
-                               "inception_3a/output": 0.2,
-                               "inception_4a/output": 0.2,
-                               "inception_5a/output": 0.2}}
-CAFFENET_WEIGHTS = {"content": {"conv4": 1},
-                    "style": {"conv1": 0.2,
-                              "conv2": 0.2,
-                              "conv3": 0.2,
-                              "conv4": 0.2,
-                              "conv5": 0.2}}
-                              
-SQUEEZENET_WEIGHTS = {"content": {"conv1": 2e-4,
+SQUEEZENET_WEIGHTS = {"content": {#"conv1": 2e-4,
                                   "conv10": 2e-4},
-                     "style": {"conv1": 0.2,
+                     "style": {"fire3/expand3x3": 0.2,
+                               "conv1": 0.2,
                                "fire4/expand3x3": 0.2,
                                "fire5/expand3x3": 0.2,
                                "fire6/expand3x3": 0.2,
@@ -237,35 +212,8 @@ class StyleTransfer(object):
 
         style_path = os.path.abspath(os.path.split(__file__)[0])
         base_path = os.path.join(style_path, "models", model_name)
-        # vgg19
-        if model_name == "vgg19":
-            model_file = os.path.join(base_path, "VGG_ILSVRC_19_layers_deploy.prototxt")
-            pretrained_file = os.path.join(base_path, "VGG_ILSVRC_19_layers.caffemodel")
-            mean_file = os.path.join(base_path, "ilsvrc_2012_mean.npy")
-            weights = VGG19_WEIGHTS
-
-        # vgg16
-        elif model_name == "vgg16":
-            model_file = os.path.join(base_path, "VGG_ILSVRC_16_layers_deploy.prototxt")
-            pretrained_file = os.path.join(base_path, "VGG_ILSVRC_16_layers.caffemodel")
-            mean_file = os.path.join(base_path, "ilsvrc_2012_mean.npy")
-            weights = VGG16_WEIGHTS
-
-        # googlenet
-        elif model_name == "googlenet":
-            model_file = os.path.join(base_path, "deploy.prototxt")
-            pretrained_file = os.path.join(base_path, "bvlc_googlenet.caffemodel")
-            mean_file = os.path.join(base_path, "ilsvrc_2012_mean.npy")
-            weights = GOOGLENET_WEIGHTS
-
-        # caffenet
-        elif model_name == "caffenet":
-            model_file = os.path.join(base_path, "deploy.prototxt")
-            pretrained_file = os.path.join(base_path, "bvlc_reference_caffenet.caffemodel")
-            mean_file = os.path.join(base_path, "ilsvrc_2012_mean.npy")
-            weights = CAFFENET_WEIGHTS
-
-        elif model_name == "squeezenet":
+        #squeezenet
+        if model_name == "squeezenet":
             model_file = os.path.join(base_path, "deploy.prototxt")
             pretrained_file = os.path.join(base_path, "squeezenet_v1.0.caffemodel")
             mean_file = os.path.join(base_path, "ilsvrc_2012_mean.npy")
