@@ -16,13 +16,12 @@ CUDA will enable GPU-based computation in Caffe.
 
 ## Download
 
-Please Download the trained Sequeezenet model from [her](https://github.com/DeepScale/SqueezeNet/blob/master/SqueezeNet_v1.0/squeezenet_v1.0.caffemodel) and also the model defination .prototxt from [here](https://github.com/DeepScale/SqueezeNet/blob/master/SqueezeNet_v1.0/deply.prototxt)
+Please Download the trained Sequeezenet model from [here](https://github.com/DeepScale/SqueezeNet/blob/master/SqueezeNet_v1.0/squeezenet_v1.0.caffemodel) and also the model defination .prototxt from [here](https://github.com/DeepScale/SqueezeNet/blob/master/SqueezeNet_v1.0/deply.prototxt)
 
 To run the code, you must have Caffe installed and the appropriate Python bindings in your `PYTHONPATH` environment variable. Detailed installation instructions for Caffe can be found [here](http://caffe.berkeleyvision.org/installation.html).
 
 All of the necessary code is contained in the file `style.py`. You can try it on your own style and content image by running the following command:
 
 ```
-python style.py -s <style_image> -c <content_image> -m <model_name> -g 0
+python style.py -s <style_image> -c <content_image> -m squeezenet -g 0
 ```
-Here, `<model_name>` must be one of `squeezenet`.
