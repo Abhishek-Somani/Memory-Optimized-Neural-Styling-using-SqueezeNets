@@ -211,7 +211,7 @@ class StyleTransfer(object):
         """
 
         style_path = os.path.abspath(os.path.split(__file__)[0])
-        base_path = os.path.join(style_path, "models", model_name)
+        base_path = os.path.join(style_path, "models")
         #squeezenet
         if model_name == "squeezenet":
             model_file = os.path.join(base_path, "deploy.prototxt")
