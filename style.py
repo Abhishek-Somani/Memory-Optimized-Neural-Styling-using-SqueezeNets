@@ -81,7 +81,17 @@ CAFFENET_WEIGHTS = {"content": {"conv4": 1},
                               "conv3": 0.2,
                               "conv4": 0.2,
                               "conv5": 0.2}}
-
+                              
+SQUEEZENET_WEIGHTS = {"content": {"conv1": 2e-4,
+                                  "conv10": 2e-4},
+                     "style": {"conv1": 0.2,
+                               "fire4/expand3x3": 0.2,
+                               "fire5/expand3x3": 0.2,
+                               "fire6/expand3x3": 0.2,
+                               "fire7/expand3x3": 0.2,
+                               "fire8/expand3x3": 0.2,
+                               "fire9/expand3x3": 0.2,
+                               "conv10": 0.2}}
 # argparse
 parser = argparse.ArgumentParser(description="Transfer the style of one image to another.",
                                  usage="style.py -s <style_image> -c <content_image>")
@@ -227,7 +237,6 @@ class StyleTransfer(object):
 
         style_path = os.path.abspath(os.path.split(__file__)[0])
         base_path = os.path.join(style_path, "models", model_name)
-
         # vgg19
         if model_name == "vgg19":
             model_file = os.path.join(base_path, "VGG_ILSVRC_19_layers_deploy.prototxt")
@@ -256,6 +265,12 @@ class StyleTransfer(object):
             mean_file = os.path.join(base_path, "ilsvrc_2012_mean.npy")
             weights = CAFFENET_WEIGHTS
 
+        elif model_name == "squeezenet":
+            model_file = os.path.join(base_path, "deploy.prototxt")
+            pretrained_file = os.path.join(base_path, "squeezenet_v1.0.caffemodel")
+            mean_file = os.path.join(base_path, "ilsvrc_2012_mean.npy")
+            weights = SQUEEZENET_WEIGHTS
+            
         else:
             assert False, "model not available"
 
@@ -511,6 +526,7 @@ def main(args):
         out_path = "outputs/{0}-{1}-{2}-{3}-{4}-{5}.jpg".format(*out_path_fmt)
 
     # DONE!
+
     imsave(out_path, img_as_ubyte(img_out))
     logging.info("Output saved to {0}.".format(out_path))
 
